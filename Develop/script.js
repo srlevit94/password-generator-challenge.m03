@@ -1,14 +1,18 @@
 // Assignment code here
-var password = {
-  length: 0,
-  upperCase: true,
-  lowerCase: true,
-  specialChar: true,
-} ;
+// var password = {
+//   length: 8,
+//   hasUpperCase: true,
+//   hasLowerCase: true,
+//   hasSpecialChar: true,
+// } ;
+
+var upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+var lower = "abcdefghijklmnopqrstuvwxyz";
+var symbols = "!#$%&'()*+,-./:;<=>?@[\\]\"^_`{|}~"
 
 var passwordRules = function(){
 //checks validity of password length
-  if (password.length >= 8 and <= 128){
+  if (password.length >== 8 and <== 128){
   console.log("That is a valid length.");
   return;
   } else {
@@ -40,8 +44,7 @@ var passwordRules = function(){
 };
 
 // Get references to the #generate element
-// The "Document" method querySelector() returns the first Element within the document that matches the specified selector,
-// or group of selectors. If no matches are found, null is returned.
+// the first element in the HTML document with the id "generate" is returned
 var generateBtn = document.querySelector("#generate");
 
 // Write password to the #password input
