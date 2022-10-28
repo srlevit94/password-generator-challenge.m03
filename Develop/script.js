@@ -3,44 +3,60 @@
 // query selector 
 var generateBtn = document.querySelector("#generate");
 
-// strings of potential characters to inlcude in password
-var characterPool = {
-  upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  lower = "abcdefghijklmnopqrstuvwxyz";
-  numbers = "0123456789";
-  special = "!#$%&'()*+,-./:;<=>?@[\\]\"^_`{|}~";
+// strings of potential characters to include in password
+const characterPool = {
+  upper : "ABCDEFGHIJKLMNOPQRSTUVWXYZ" ,
+  lower : "abcdefghijklmnopqrstuvwxyz",
+  numbers : "0123456789",
+  special : "!#$%&'()*+,-./:;<=>?@[\\]\"^_`{|}~",
 };
 
-// prompts user to select types of characters to include in the password
+// prompts user to select length and types of characters to include in the password
 function generatePassword() {
 
-  var characters = ""
+  var finalCharacters = "";
   
-  var length = window.prompt("Please input password length (min 8, max 128).", 0));
-  if (length < 8 || length > 128) {
-    alert("length must be at least 8 characters and no more than 128 characters.")  
+  //asks user to input length and checks whether input is valid
+  var length = window.prompt("Please input password length (min 8, max 128).", 0);
+  if (length < 8 || length > 128 || isNaN(length) === true) {
+    alert("Length must be a numeric value within 8 and 128. Try again. ")
+    length = null;
+  }
+  if (length === null) {
+    return;
   }
 
+  //confirms whether or not to include uppercase letters in characterPool
   var upper = window.confirm("Do you want to include uppercase letters?");
   if (upper) {
-    characterPool += characterPool.upper;
+    finalCharacters += characterPool.upper;
   }
 
+  //confirms whether or not to include lowercase letters in characterPool
   var lower = window.confirm("Do you want to include lowercase letters?");
   if (lower) {
-    characterPool += characterPool.lower;
+    finalCharacters += characterPool.lower;
   }
 
+  //confirms whether or not to include numbers in characterPool
   var numbers = window.confirm("Do you want to include numbers?");
   if (numbers) {
-    characterPool += characterPool.numbers;
+    finalCharacters += characterPool.numbers;
   }
 
-  var speacial = window.confirm("Do you want to include special characters?");
+  //confirms whether or not to include special characters in characterPool
+  var special = window.confirm("Do you want to include special characters?");
   if (special) {
-    characterPool += characterPool.special;
+    finalCharacters += characterPool.special;
   }
- 
+
+  //randomly selects possible characters from characterPool until desired length is achieved
+  //returns a final value for password
+  var password = "";
+  for (let i = 0; i < length; i++) {
+    password += finalCharacters[Math.floor(Math.random() * finalCharacters.length)]
+  }
+  return password;
 }
 
 // Write password to the #password input
@@ -55,41 +71,5 @@ function writePassword() { //
 generateBtn.addEventListener("click", writePassword);
 
 
-
-
-
-
-// var passwordRules = function(){
-// //checks validity of password length
-//   if (password.length >== 8 and <== 128){
-//   console.log("That is a valid length.");
-//   return;
-//   } else {
-//   console.log("Choose a length between 8 and 28 characters.");
-//   }
-
-//   //checks to include upper-case letters
-//   if (password.hasUpperCase){
-//   console.log("Your password includes upper-case letters.");
-//   return;
-//   } else {
-//   console.log("Your password does not include upper-case letters");
-//   }
-
-//   //checks to include lower-case letters
-//   if (password.hasLowerCase){
-//   console.log("Your password includes lower case letters.");
-//   return;
-//   } else {
-//   console.log("Your password does not include lower-case letters");
-//   }
-//   //checks to inlcude special characters
-//   if (password.hasSpecialChar){
-//   console.log("Your password includes special characters.");
-//   return;
-//   } else {
-//   console.log("Your password does not special characters.");
-//   }
-// };
 
 
